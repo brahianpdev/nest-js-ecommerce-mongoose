@@ -11,7 +11,7 @@ export class ProductService {
 
   async findAll(): Promise<Product[]> {
     try {
-      return await this.productModel.find();
+      return await this.productModel.find().populate('category');
     } catch (error) {
       throw new Error(error);
     }
@@ -19,7 +19,7 @@ export class ProductService {
 
   async findById(id: string): Promise<Product> {
     try {
-      const product = await this.productModel.findById(id);
+      const product = await this.productModel.findById(id).populate('category');
       if (!product) {
         throw new HttpException('Product not found', HttpStatus.NO_CONTENT);
       }
@@ -29,12 +29,12 @@ export class ProductService {
     }
   }
 
-  async createProduct(productDTO: CreateProductDTO): Promise<Product> {
+  async createProduct(createProductDTO: CreateProductDTO): Promise<Product> {
     try {
-      const product = await this.productModel.create(productDTO);
+      const product = await this.productModel.create(createProductDTO);
       return await product.save();
     } catch (error) {
-      throw new Error();
+      throw new Error(error);
     }
   }
 
@@ -50,7 +50,7 @@ export class ProductService {
       );
 
       await product.update(updateProductDTO);
-      return await this.productModel.findById(productID);
+      return await this.productModel.findById(productID).populate('category');
     } catch (error) {
       throw new Error(error);
     }
@@ -61,13 +61,13 @@ export class ProductService {
     updateProductDTO: UpdateProductDTO,
   ): Promise<Product> {
     try {
-      const user = await this.productModel.findByIdAndUpdate(
+      const product = await this.productModel.findByIdAndUpdate(
         productID,
         { state: false },
         updateProductDTO,
       );
 
-      return user;
+      return product;
     } catch (error) {
       throw new Error(error);
     }
