@@ -51,7 +51,7 @@ export class ProductController {
   }
 
   @Get(':productID')
-  async read(
+  async findById(
     @Res() res,
     @Param('productID') productID: string,
   ): Promise<Product> {
