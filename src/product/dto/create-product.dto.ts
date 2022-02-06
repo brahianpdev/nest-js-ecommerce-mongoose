@@ -2,6 +2,7 @@ export class CreateProductDTO {
   title: string;
   image: string;
   description: string;
+  category: string;
   price: number;
   state: boolean;
   createdAt: Date;
