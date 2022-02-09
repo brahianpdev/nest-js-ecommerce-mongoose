@@ -22,7 +22,7 @@ export class UserService {
     }
   }
 
-  async create(createUserDTO: CreateUserDTO): Promise<User> {
+  async createUser(createUserDTO: CreateUserDTO): Promise<User> {
     try {
       const { username, password, email, role } = createUserDTO;
 
@@ -72,6 +72,12 @@ export class UserService {
     updateUserDTO: UpdateUserDTO,
   ): Promise<User> {
     try {
+      const { password } = updateUserDTO;
+
+      const salt = await bcrypt.genSalt();
+      const hashPassword = await this.hashPassword(password, salt);
+      console.log(hashPassword); // <<<--- How do I set the password for the edited user?
+
       const user = await this.userModel.findByIdAndUpdate(
         userID,
         updateUserDTO,
