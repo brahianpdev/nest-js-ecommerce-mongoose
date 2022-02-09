@@ -3,6 +3,7 @@ export class CreateProductDTO {
   image: string;
   description: string;
   category: string;
+  comment: string;
   price: number;
   state: boolean;
   createdAt: Date;
