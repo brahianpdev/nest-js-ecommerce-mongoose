@@ -94,11 +94,10 @@ export class CategoryController {
     @Body() updateCategoryDTO: UpdateCategoryDTO,
   ): Promise<Category> {
     try {
-      const category = await this.categoryService.updateCategory(
+      const category = await this.categoryService.deleteCategory(
         categoryID,
         updateCategoryDTO,
       );
-
       return res.status(HttpStatus.OK).json({
         message: 'Category removed successfully',
         category,
