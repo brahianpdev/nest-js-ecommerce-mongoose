@@ -6,6 +6,7 @@ export interface Product extends Document {
   image: string;
   description: string;
   category: string;
+  comment: string;
   price: number;
   state: boolean;
   created: Date;
