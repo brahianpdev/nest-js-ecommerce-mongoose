@@ -20,11 +20,11 @@ export class UserController {
   @Post('register')
   async create(
     @Res() res,
-    @Body() createUserDto: CreateUserDTO,
+    @Body() createUserDtO: CreateUserDTO,
   ): Promise<User> {
     try {
-      const user = await this.userService.create(createUserDto);
-      return res.status.HttpStatus(HttpStatus.OK).json({
+      const user = await this.userService.createUser(createUserDtO);
+      return res.status(HttpStatus.OK).json({
         message: 'User created successfully',
         user,
       });
