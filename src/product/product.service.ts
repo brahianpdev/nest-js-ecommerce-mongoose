@@ -11,7 +11,10 @@ export class ProductService {
 
   async findAll(): Promise<Product[]> {
     try {
-      return await this.productModel.find().populate('category');
+      return await this.productModel
+        .find()
+        .populate('category')
+        .populate('owner');
     } catch (error) {
       throw new Error(error);
     }
@@ -19,7 +22,10 @@ export class ProductService {
 
   async findById(id: string): Promise<Product> {
     try {
-      const product = await this.productModel.findById(id).populate('category');
+      const product = await this.productModel
+        .findById(id)
+        // .populate('category')
+        .populate('owner');
       if (!product) {
         throw new HttpException('Product not found', HttpStatus.NO_CONTENT);
       }
