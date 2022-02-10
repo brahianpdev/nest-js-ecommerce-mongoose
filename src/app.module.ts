@@ -10,6 +10,8 @@ import { AuthModule } from './auth/auth.module';
 import { UserModule } from './user/user.module';
 import { CategoryModule } from './category/category.module';
 import { CommentModule } from './comment/comment.module';
+import { BrandModule } from './brand/brand.module';
+import { SubcategoryModule } from './subcategory/subcategory.module';
 
 @Module({
   imports: [
@@ -21,6 +23,8 @@ import { CommentModule } from './comment/comment.module';
     ProductModule,
     CategoryModule,
     CommentModule,
+    BrandModule,
+    SubcategoryModule,
   ],
   controllers: [AppController],
   providers: [AppService],
