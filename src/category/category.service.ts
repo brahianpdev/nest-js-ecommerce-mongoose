@@ -69,13 +69,13 @@ export class CategoryService {
     updateCategoryDTO: UpdateCategoryDTO,
   ): Promise<Category> {
     try {
-      const user = await this.categoryModel.findByIdAndUpdate(
+      const category = await this.categoryModel.findByIdAndUpdate(
         categoryID,
         { state: false },
         updateCategoryDTO,
       );
 
-      return user;
+      return category;
     } catch (error) {
       throw new Error(error);
     }
