@@ -13,8 +13,9 @@ export class ProductService {
     try {
       return await this.productModel
         .find()
+        .populate('brand')
         .populate('category')
-        .populate('owner');
+        .populate('subcategory');
     } catch (error) {
       throw new Error(error);
     }
@@ -24,8 +25,9 @@ export class ProductService {
     try {
       const product = await this.productModel
         .findById(id)
-        // .populate('category')
-        .populate('owner');
+        .populate('brand')
+        .populate('category')
+        .populate('subcategory');
       if (!product) {
         throw new HttpException('Product not found', HttpStatus.NO_CONTENT);
       }
@@ -56,7 +58,11 @@ export class ProductService {
       );
 
       await product.update(updateProductDTO);
-      return await this.productModel.findById(productID).populate('category');
+      return await this.productModel
+        .findById(productID)
+        .populate('category')
+        .populate('subcategory')
+        .populate('brand');
     } catch (error) {
       throw new Error(error);
     }
