@@ -12,6 +12,7 @@ import { CategoryModule } from './category/category.module';
 import { CommentModule } from './comment/comment.module';
 import { BrandModule } from './brand/brand.module';
 import { SubcategoryModule } from './subcategory/subcategory.module';
+import { OrderModule } from './order/order.module';
 
 @Module({
   imports: [
@@ -25,6 +26,7 @@ import { SubcategoryModule } from './subcategory/subcategory.module';
     CommentModule,
     BrandModule,
     SubcategoryModule,
+    OrderModule,
   ],
   controllers: [AppController],
   providers: [AppService],
