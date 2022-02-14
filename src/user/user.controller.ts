@@ -8,10 +8,12 @@ import {
   Post,
   Put,
   Res,
+  UseGuards,
 } from '@nestjs/common';
 import { CreateUserDTO, UpdateUserDTO } from './dto/create-user.dto';
 import { UserService } from './user.service';
 import { User } from './interfaces/user.interface';
+import { JwtAuthGuard } from 'src/auth/jwt-auth.guard';
 
 @Controller('user')
 export class UserController {
@@ -33,6 +35,7 @@ export class UserController {
     }
   }
 
+  @UseGuards(JwtAuthGuard)
   @Get()
   async findAll(@Res() res): Promise<User[]> {
     try {
@@ -46,6 +49,7 @@ export class UserController {
     }
   }
 
+  @UseGuards(JwtAuthGuard)
   @Get(':userID')
   async findById(@Res() res, @Param('userID') userID): Promise<User> {
     try {
@@ -59,6 +63,7 @@ export class UserController {
     }
   }
 
+  @UseGuards(JwtAuthGuard)
   @Put(':userID')
   async update(
     @Res() res,
@@ -72,10 +77,12 @@ export class UserController {
         user,
       });
     } catch (error) {
+      console.log(error);
       throw new Error(error);
     }
   }
 
+  @UseGuards(JwtAuthGuard)
   @Delete(':userID')
   async delete(
     @Res() res,
