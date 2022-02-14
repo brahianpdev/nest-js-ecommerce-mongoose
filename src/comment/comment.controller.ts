@@ -8,10 +8,13 @@ import {
   Post,
   Put,
   Res,
+  UseGuards,
 } from '@nestjs/common';
+import { JwtAuthGuard } from 'src/auth/jwt-auth.guard';
 import { CommentService } from './comment.service';
 import { CreateCommentDTO, UpdateCommentDTO } from './dto/create-comment-dto';
 
+@UseGuards(JwtAuthGuard)
 @Controller('comment')
 export class CommentController {
   constructor(private commentService: CommentService) {}
@@ -72,6 +75,7 @@ export class CommentController {
         commentID,
         updateCommentDTO,
       );
+      console.log(comment);
       return res.status(HttpStatus.OK).json({
         message: 'Comment update successfully',
         comment,
