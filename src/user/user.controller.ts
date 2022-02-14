@@ -9,7 +9,7 @@ import {
   Put,
   Res,
 } from '@nestjs/common';
-import { CreateUserDTO } from './dto/create-user.dto';
+import { CreateUserDTO, UpdateUserDTO } from './dto/create-user.dto';
 import { UserService } from './user.service';
 import { User } from './interfaces/user.interface';
 
@@ -63,7 +63,7 @@ export class UserController {
   async update(
     @Res() res,
     @Param('userID') userID,
-    @Body() updateUserDTO: CreateUserDTO,
+    @Body() updateUserDTO: UpdateUserDTO,
   ): Promise<User> {
     try {
       const user = await this.userService.updateUser(userID, updateUserDTO);
