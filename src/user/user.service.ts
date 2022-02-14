@@ -76,7 +76,7 @@ export class UserService {
 
       const salt = await bcrypt.genSalt();
       const hashPassword = await this.hashPassword(password, salt);
-      console.log(hashPassword); // <<<--- How do I set the password for the edited user?
+      updateUserDTO.password = hashPassword;
 
       const user = await this.userModel.findByIdAndUpdate(
         userID,
