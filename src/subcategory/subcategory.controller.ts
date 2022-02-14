@@ -8,7 +8,9 @@ import {
   Post,
   Put,
   Res,
+  UseGuards,
 } from '@nestjs/common';
+import { JwtAuthGuard } from 'src/auth/jwt-auth.guard';
 import {
   CreateSubCategoryDTO,
   UpdateSubCategoryDTO,
@@ -20,6 +22,7 @@ import { SubcategoryService } from './subcategory.service';
 export class SubcategoryController {
   constructor(private subCategoryService: SubcategoryService) {}
 
+  @UseGuards(JwtAuthGuard)
   @Post()
   async create(
     @Res() res,
@@ -67,6 +70,7 @@ export class SubcategoryController {
     }
   }
 
+  @UseGuards(JwtAuthGuard)
   @Put(':subCategoryID')
   async update(
     @Res() res,
@@ -87,6 +91,7 @@ export class SubcategoryController {
     }
   }
 
+  @UseGuards(JwtAuthGuard)
   @Delete(':subCategoryID')
   async delete(
     @Res() res,
