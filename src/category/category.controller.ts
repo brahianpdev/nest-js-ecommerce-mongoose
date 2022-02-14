@@ -8,7 +8,9 @@ import {
   Post,
   Put,
   Res,
+  UseGuards,
 } from '@nestjs/common';
+import { JwtAuthGuard } from 'src/auth/jwt-auth.guard';
 import { CategoryService } from './category.service';
 import {
   CreateCategoryDTO,
@@ -16,6 +18,7 @@ import {
 } from './dto/create-category.dto';
 import { Category } from './interfaces/category.interface';
 
+@UseGuards(JwtAuthGuard)
 @Controller('category')
 export class CategoryController {
   constructor(private categoryService: CategoryService) {}
