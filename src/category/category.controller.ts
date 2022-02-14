@@ -18,11 +18,11 @@ import {
 } from './dto/create-category.dto';
 import { Category } from './interfaces/category.interface';
 
-@UseGuards(JwtAuthGuard)
 @Controller('category')
 export class CategoryController {
   constructor(private categoryService: CategoryService) {}
 
+  @UseGuards(JwtAuthGuard)
   @Post()
   async create(
     @Res() res,
@@ -70,6 +70,7 @@ export class CategoryController {
     }
   }
 
+  @UseGuards(JwtAuthGuard)
   @Put(':categoryID')
   async update(
     @Res() res,
@@ -90,6 +91,7 @@ export class CategoryController {
     }
   }
 
+  @UseGuards(JwtAuthGuard)
   @Delete(':categoryID')
   async delete(
     @Res() res,
