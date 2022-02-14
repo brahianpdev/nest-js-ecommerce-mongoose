@@ -14,11 +14,11 @@ import { JwtAuthGuard } from 'src/auth/jwt-auth.guard';
 import { CommentService } from './comment.service';
 import { CreateCommentDTO, UpdateCommentDTO } from './dto/create-comment-dto';
 
-@UseGuards(JwtAuthGuard)
 @Controller('comment')
 export class CommentController {
   constructor(private commentService: CommentService) {}
 
+  @UseGuards(JwtAuthGuard)
   @Post()
   async create(
     @Res() res,
@@ -64,6 +64,7 @@ export class CommentController {
     }
   }
 
+  @UseGuards(JwtAuthGuard)
   @Put(':commentID')
   async update(
     @Res() res,
@@ -85,6 +86,7 @@ export class CommentController {
     }
   }
 
+  @UseGuards(JwtAuthGuard)
   @Delete(':commentID')
   async delete(
     @Res() res,
