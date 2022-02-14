@@ -8,19 +8,18 @@ import {
   Post,
   Put,
   Res,
-  // UseGuards,
+  UseGuards,
 } from '@nestjs/common';
 
 import { Product } from './interfaces/product.interface';
 import { CreateProductDTO, UpdateProductDTO } from './dto/create-product.dto';
 import { ProductService } from './product.service';
-// import { JwtAuthGuard } from 'src/auth/jwt-auth.guard';
-
-// @UseGuards(JwtAuthGuard)
+import { JwtAuthGuard } from 'src/auth/jwt-auth.guard';
 @Controller('product')
 export class ProductController {
   constructor(private productService: ProductService) {}
 
+  @UseGuards(JwtAuthGuard)
   @Post()
   async create(
     @Res() res,
@@ -66,6 +65,7 @@ export class ProductController {
     }
   }
 
+  @UseGuards(JwtAuthGuard)
   @Put(':productID')
   async update(
     @Res() res,
@@ -86,6 +86,7 @@ export class ProductController {
     }
   }
 
+  @UseGuards(JwtAuthGuard)
   @Delete(':productID')
   async delete(
     @Res() res,
