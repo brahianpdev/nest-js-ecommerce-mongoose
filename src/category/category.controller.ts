@@ -87,6 +87,7 @@ export class CategoryController {
         category,
       });
     } catch (error) {
+      console.log(error);
       throw new Error(error);
     }
   }
@@ -96,13 +97,9 @@ export class CategoryController {
   async delete(
     @Res() res,
     @Param('categoryID') categoryID: string,
-    @Body() updateCategoryDTO: UpdateCategoryDTO,
   ): Promise<Category> {
     try {
-      const category = await this.categoryService.deleteCategory(
-        categoryID,
-        updateCategoryDTO,
-      );
+      const category = await this.categoryService.deleteCategory(categoryID);
       return res.status(HttpStatus.OK).json({
         message: 'Category removed successfully',
         category,
