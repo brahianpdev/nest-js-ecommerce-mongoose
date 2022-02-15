@@ -57,12 +57,7 @@ export class ProductService {
         updateProductDTO,
       );
 
-      await product.update(updateProductDTO);
-      return await this.productModel
-        .findById(productID)
-        .populate('category')
-        .populate('subcategory')
-        .populate('brand');
+      return product;
     } catch (error) {
       throw new Error(error);
     }

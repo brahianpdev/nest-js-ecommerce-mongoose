@@ -62,8 +62,7 @@ export class SubcategoryService {
         updateSubCategoryDTO,
       );
 
-      await subCategory.update(updateSubCategoryDTO);
-      return await this.subCategoryModel.findById(subCategoryID);
+      return subCategory;
     } catch (error) {
       throw new Error(error);
     }

@@ -50,8 +50,7 @@ export class BrandService {
         updateBrandDTO,
       );
 
-      await brand.update(updateBrandDTO);
-      return await this.brandModel.findById(brandID);
+      return brand;
     } catch (error) {
       throw new Error(error);
     }

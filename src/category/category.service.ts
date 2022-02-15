@@ -57,8 +57,7 @@ export class CategoryService {
         updateCategoryDTO,
       );
 
-      await category.update(updateCategoryDTO);
-      return await this.categoryModel.findById(categoryID);
+      return category;
     } catch (error) {
       throw new Error(error);
     }

@@ -44,12 +44,13 @@ export class CommentService {
     try {
       const comment = await this.commentModel.findByIdAndUpdate(
         commentID,
-        { new: true },
         updateCommentDTO,
+        { new: true },
       );
 
-      await comment.update(updateCommentDTO);
-      return await this.commentModel.findById(commentID);
+      console.log({ comment });
+
+      return comment;
     } catch (error) {
       throw new Error(error);
     }
