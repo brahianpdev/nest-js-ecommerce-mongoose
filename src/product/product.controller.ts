@@ -91,13 +91,9 @@ export class ProductController {
   async delete(
     @Res() res,
     @Param('productID') productID: string,
-    @Body() updateProductDTO: UpdateProductDTO,
   ): Promise<Product> {
     try {
-      const product = await this.productService.updateProduct(
-        productID,
-        updateProductDTO,
-      );
+      const product = await this.productService.deleteProduct(productID);
       return res.status(HttpStatus.OK).json({
         message: 'Product removed successfully',
         product,
