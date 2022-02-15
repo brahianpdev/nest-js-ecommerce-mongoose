@@ -46,8 +46,8 @@ export class BrandService {
     try {
       const brand = await this.brandModel.findByIdAndUpdate(
         brandID,
-        { new: true },
         updateBrandDTO,
+        { new: true },
       );
 
       return brand;
@@ -56,16 +56,11 @@ export class BrandService {
     }
   }
 
-  async deleteBrand(
-    brandID: string,
-    updateBrandDTO: UpdateBrandDTO,
-  ): Promise<Brand> {
+  async deleteBrand(brandID: string): Promise<Brand> {
     try {
-      const brand = await this.brandModel.findByIdAndUpdate(
-        brandID,
-        { state: false },
-        updateBrandDTO,
-      );
+      const brand = await this.brandModel.findByIdAndUpdate(brandID, {
+        state: false,
+      });
 
       return brand;
     } catch (error) {
