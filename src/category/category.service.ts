@@ -53,8 +53,8 @@ export class CategoryService {
     try {
       const category = await this.categoryModel.findByIdAndUpdate(
         categoryID,
-        { new: true },
         updateCategoryDTO,
+        { new: true },
       );
 
       return category;
@@ -63,16 +63,11 @@ export class CategoryService {
     }
   }
 
-  async deleteCategory(
-    categoryID: string,
-    updateCategoryDTO: UpdateCategoryDTO,
-  ): Promise<Category> {
+  async deleteCategory(categoryID: string): Promise<Category> {
     try {
-      const category = await this.categoryModel.findByIdAndUpdate(
-        categoryID,
-        { state: false },
-        updateCategoryDTO,
-      );
+      const category = await this.categoryModel.findByIdAndUpdate(categoryID, {
+        state: false,
+      });
 
       return category;
     } catch (error) {
