@@ -53,8 +53,8 @@ export class ProductService {
     try {
       const product = await this.productModel.findByIdAndUpdate(
         productID,
-        { new: true },
         updateProductDTO,
+        { new: true },
       );
 
       return product;
@@ -63,16 +63,11 @@ export class ProductService {
     }
   }
 
-  async deleteProduct(
-    productID: string,
-    updateProductDTO: UpdateProductDTO,
-  ): Promise<Product> {
+  async deleteProduct(productID: string): Promise<Product> {
     try {
-      const product = await this.productModel.findByIdAndUpdate(
-        productID,
-        { state: false },
-        updateProductDTO,
-      );
+      const product = await this.productModel.findByIdAndUpdate(productID, {
+        state: false,
+      });
 
       return product;
     } catch (error) {
