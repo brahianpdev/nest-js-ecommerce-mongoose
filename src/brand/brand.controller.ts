@@ -86,16 +86,9 @@ export class BrandController {
   }
 
   @Delete(':brandID')
-  async delete(
-    @Res() res,
-    @Param('brandID') brandID: string,
-    @Body() updateBrandDTO: UpdateBrandDTO,
-  ): Promise<Brand> {
+  async delete(@Res() res, @Param('brandID') brandID: string): Promise<Brand> {
     try {
-      const brand = await this.brandService.deleteBrand(
-        brandID,
-        updateBrandDTO,
-      );
+      const brand = await this.brandService.deleteBrand(brandID);
       return res.status(HttpStatus.OK).json({
         message: 'Brand removed successfully',
         brand,
