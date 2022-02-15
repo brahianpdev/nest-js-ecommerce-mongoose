@@ -84,13 +84,9 @@ export class UserController {
 
   @UseGuards(JwtAuthGuard)
   @Delete(':userID')
-  async delete(
-    @Res() res,
-    @Param('userID') userID: string,
-    @Body() updateUserDTO: CreateUserDTO,
-  ): Promise<User> {
+  async delete(@Res() res, @Param('userID') userID: string): Promise<User> {
     try {
-      const user = await this.userService.deleteUSer(userID, updateUserDTO);
+      const user = await this.userService.deleteUSer(userID);
       return res.status(HttpStatus.OK).json({
         message: 'User removed successfully',
         user,
