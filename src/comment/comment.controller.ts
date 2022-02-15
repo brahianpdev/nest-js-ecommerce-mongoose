@@ -91,13 +91,9 @@ export class CommentController {
   async delete(
     @Res() res,
     @Param('commentID') userID: string,
-    @Body() updateCommentDTO: CreateCommentDTO,
   ): Promise<Comment> {
     try {
-      const comment = await this.commentService.deleteComment(
-        userID,
-        updateCommentDTO,
-      );
+      const comment = await this.commentService.deleteComment(userID);
       return res.status(HttpStatus.OK).json({
         message: 'Comment removed successfully',
         comment,
