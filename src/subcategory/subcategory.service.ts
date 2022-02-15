@@ -58,8 +58,8 @@ export class SubcategoryService {
     try {
       const subCategory = await this.subCategoryModel.findByIdAndUpdate(
         subCategoryID,
-        { new: true },
         updateSubCategoryDTO,
+        { new: true },
       );
 
       return subCategory;
@@ -68,15 +68,11 @@ export class SubcategoryService {
     }
   }
 
-  async deleteSubCategory(
-    subCategoryID: string,
-    updateSubCategoryDTO: UpdateSubCategoryDTO,
-  ): Promise<SubCategory> {
+  async deleteSubCategory(subCategoryID: string): Promise<SubCategory> {
     try {
       const subCategory = await this.subCategoryModel.findByIdAndUpdate(
         subCategoryID,
         { state: false },
-        updateSubCategoryDTO,
       );
 
       return subCategory;
