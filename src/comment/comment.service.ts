@@ -56,16 +56,11 @@ export class CommentService {
     }
   }
 
-  async deleteComment(
-    userID: string,
-    updateCommentDTO: UpdateCommentDTO,
-  ): Promise<Comment> {
+  async deleteComment(userID: string): Promise<Comment> {
     try {
-      const comment = await this.commentModel.findByIdAndUpdate(
-        userID,
-        { state: false },
-        updateCommentDTO,
-      );
+      const comment = await this.commentModel.findByIdAndUpdate(userID, {
+        state: false,
+      });
 
       return comment;
     } catch (error) {
