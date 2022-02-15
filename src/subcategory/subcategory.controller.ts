@@ -96,12 +96,10 @@ export class SubcategoryController {
   async delete(
     @Res() res,
     @Param('subCategoryID') subCategoryID: string,
-    @Body() updateSubCategoryDTO: UpdateSubCategoryDTO,
   ): Promise<SubCategory> {
     try {
       const subCategory = await this.subCategoryService.deleteSubCategory(
         subCategoryID,
-        updateSubCategoryDTO,
       );
       return res.status(HttpStatus.OK).json({
         message: 'SubCategory removed successfully',
