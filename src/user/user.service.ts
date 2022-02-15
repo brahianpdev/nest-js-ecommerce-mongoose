@@ -90,16 +90,11 @@ export class UserService {
     }
   }
 
-  async deleteUSer(
-    userID: string,
-    updateUserDTO: UpdateUserDTO,
-  ): Promise<User> {
+  async deleteUSer(userID: string): Promise<User> {
     try {
-      const user = await this.userModel.findByIdAndUpdate(
-        userID,
-        { state: false },
-        updateUserDTO,
-      );
+      const user = await this.userModel.findByIdAndUpdate(userID, {
+        state: false,
+      });
 
       return user;
     } catch (error) {
