@@ -3,7 +3,6 @@ import {
   Controller,
   Delete,
   Get,
-  HttpStatus,
   Param,
   Post,
   Put,
@@ -26,7 +25,7 @@ export class CommentController {
   ): Promise<Comment> {
     try {
       const comment = await this.commentService.createComment(createCommentDTO);
-      return res.status(HttpStatus.OK).json({
+      return res.json({
         message: 'Comment created successfully',
         comment,
       });
@@ -39,7 +38,7 @@ export class CommentController {
   async findAll(@Res() res): Promise<Comment[]> {
     try {
       const comments = await this.commentService.findAll();
-      return res.status(HttpStatus.OK).json({
+      return res.json({
         message: 'Comments obtained successfully',
         comments,
       });
@@ -55,7 +54,7 @@ export class CommentController {
   ): Promise<Comment> {
     try {
       const comment = await this.commentService.findById(commentID);
-      return res.status(HttpStatus.OK).json({
+      return res.json({
         message: 'Comment obtained successfully',
         comment,
       });
@@ -77,7 +76,7 @@ export class CommentController {
         updateCommentDTO,
       );
       console.log(comment);
-      return res.status(HttpStatus.OK).json({
+      return res.json({
         message: 'Comment update successfully',
         comment,
       });
@@ -94,7 +93,7 @@ export class CommentController {
   ): Promise<Comment> {
     try {
       const comment = await this.commentService.deleteComment(userID);
-      return res.status(HttpStatus.OK).json({
+      return res.json({
         message: 'Comment removed successfully',
         comment,
       });
