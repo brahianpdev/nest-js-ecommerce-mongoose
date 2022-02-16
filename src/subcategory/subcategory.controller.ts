@@ -3,7 +3,6 @@ import {
   Controller,
   Delete,
   Get,
-  HttpStatus,
   Param,
   Post,
   Put,
@@ -32,7 +31,7 @@ export class SubcategoryController {
       const subCategory = await this.subCategoryService.createSubCategory(
         createSubCategoryDTO,
       );
-      return res.status(HttpStatus.OK).json({
+      return res.json({
         message: 'Sub Category created successfully',
         subCategory,
       });
@@ -45,7 +44,7 @@ export class SubcategoryController {
   async findAll(@Res() res): Promise<SubCategory[]> {
     try {
       const subCategory = await this.subCategoryService.findAll();
-      return res.status(HttpStatus.OK).json({
+      return res.json({
         message: 'Sub Categories obtained successfully',
         subCategory,
       });
@@ -61,7 +60,7 @@ export class SubcategoryController {
   ): Promise<SubCategory> {
     try {
       const subCategory = await this.subCategoryService.findById(subCategoryID);
-      return res.status(HttpStatus.OK).json({
+      return res.json({
         message: 'SubCategory obtained successfully',
         subCategory,
       });
@@ -82,7 +81,7 @@ export class SubcategoryController {
         subCategoryID,
         updateSubCategoryDTO,
       );
-      return res.status(HttpStatus.OK).json({
+      return res.json({
         message: 'SubCategory update successfully',
         subCategory,
       });
@@ -101,7 +100,7 @@ export class SubcategoryController {
       const subCategory = await this.subCategoryService.deleteSubCategory(
         subCategoryID,
       );
-      return res.status(HttpStatus.OK).json({
+      return res.json({
         message: 'SubCategory removed successfully',
         subCategory,
       });
