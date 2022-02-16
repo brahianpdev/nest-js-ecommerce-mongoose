@@ -3,7 +3,6 @@ import {
   Controller,
   Delete,
   Get,
-  HttpStatus,
   Param,
   Post,
   Put,
@@ -27,7 +26,7 @@ export class BrandController {
   ): Promise<Brand> {
     try {
       const brand = await this.brandService.createBrand(createBrandDTO);
-      return res.status(HttpStatus.OK).json({
+      return res.json({
         message: 'Brand created successfully',
         brand,
       });
@@ -40,7 +39,7 @@ export class BrandController {
   async findAll(@Res() res): Promise<Brand[]> {
     try {
       const brand = await this.brandService.findAll();
-      return res.status(HttpStatus.OK).json({
+      return res.json({
         message: 'Brand obtained successfully',
         brand,
       });
@@ -56,7 +55,7 @@ export class BrandController {
   ): Promise<Brand> {
     try {
       const brand = await this.brandService.findById(brandID);
-      return res.status(HttpStatus.OK).json({
+      return res.json({
         message: 'Brand obtained successfully',
         brand,
       });
@@ -76,7 +75,7 @@ export class BrandController {
         brandID,
         updateBrandDTO,
       );
-      return res.status(HttpStatus.OK).json({
+      return res.json({
         message: 'Brand update successfully',
         brand,
       });
@@ -89,7 +88,7 @@ export class BrandController {
   async delete(@Res() res, @Param('brandID') brandID: string): Promise<Brand> {
     try {
       const brand = await this.brandService.deleteBrand(brandID);
-      return res.status(HttpStatus.OK).json({
+      return res.json({
         message: 'Brand removed successfully',
         brand,
       });
