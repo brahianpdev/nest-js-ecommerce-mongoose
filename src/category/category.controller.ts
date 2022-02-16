@@ -3,7 +3,6 @@ import {
   Controller,
   Delete,
   Get,
-  HttpStatus,
   Param,
   Post,
   Put,
@@ -32,7 +31,7 @@ export class CategoryController {
       const category = await this.categoryService.createCategory(
         createCategoryDTO,
       );
-      return res.status(HttpStatus.OK).json({
+      return res.json({
         message: 'Category created successfully',
         category,
       });
@@ -45,7 +44,7 @@ export class CategoryController {
   async findAll(@Res() res): Promise<Category[]> {
     try {
       const category = await this.categoryService.findAll();
-      return res.status(HttpStatus.OK).json({
+      return res.json({
         message: 'Categories obtained successfully',
         category,
       });
@@ -61,7 +60,7 @@ export class CategoryController {
   ): Promise<Category> {
     try {
       const category = await this.categoryService.findById(categoryID);
-      return res.status(HttpStatus.OK).json({
+      return res.json({
         message: 'Category obtained successfully',
         category,
       });
@@ -82,7 +81,7 @@ export class CategoryController {
         categoryID,
         updateCategoryDTO,
       );
-      return res.status(HttpStatus.OK).json({
+      return res.json({
         message: 'Category update successfully',
         category,
       });
@@ -100,7 +99,7 @@ export class CategoryController {
   ): Promise<Category> {
     try {
       const category = await this.categoryService.deleteCategory(categoryID);
-      return res.status(HttpStatus.OK).json({
+      return res.json({
         message: 'Category removed successfully',
         category,
       });
