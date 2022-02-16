@@ -3,7 +3,6 @@ import {
   Controller,
   Delete,
   Get,
-  HttpStatus,
   Param,
   Post,
   Put,
@@ -27,7 +26,7 @@ export class ProductController {
   ): Promise<Product> {
     try {
       const product = await this.productService.createProduct(createProductDTO);
-      return res.status(HttpStatus.OK).json({
+      return res.json({
         message: 'Product created successfully',
         product,
       });
@@ -40,7 +39,7 @@ export class ProductController {
   async findAll(@Res() res): Promise<Product[]> {
     try {
       const products = await this.productService.findAll();
-      return res.status(HttpStatus.OK).json({
+      return res.json({
         message: 'Products obtained successfully',
         products,
       });
@@ -56,7 +55,7 @@ export class ProductController {
   ): Promise<Product> {
     try {
       const product = await this.productService.findById(productID);
-      return res.status(HttpStatus.OK).json({
+      return res.json({
         message: 'Product obtained successfully',
         product,
       });
@@ -77,7 +76,7 @@ export class ProductController {
         productID,
         updateProductDTO,
       );
-      return res.status(HttpStatus.OK).json({
+      return res.json({
         message: 'Product update successfully',
         product,
       });
@@ -94,7 +93,7 @@ export class ProductController {
   ): Promise<Product> {
     try {
       const product = await this.productService.deleteProduct(productID);
-      return res.status(HttpStatus.OK).json({
+      return res.json({
         message: 'Product removed successfully',
         product,
       });
