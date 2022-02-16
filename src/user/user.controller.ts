@@ -3,7 +3,6 @@ import {
   Controller,
   Delete,
   Get,
-  HttpStatus,
   Param,
   Post,
   Put,
@@ -26,7 +25,7 @@ export class UserController {
   ): Promise<User> {
     try {
       const user = await this.userService.createUser(createUserDtO);
-      return res.status(HttpStatus.OK).json({
+      return res.json({
         message: 'User created successfully',
         user,
       });
@@ -40,7 +39,7 @@ export class UserController {
   async findAll(@Res() res): Promise<User[]> {
     try {
       const users = await this.userService.findAll();
-      return res.status(HttpStatus.OK).json({
+      return res.json({
         message: 'Users obtained successfully',
         users,
       });
@@ -54,7 +53,7 @@ export class UserController {
   async findById(@Res() res, @Param('userID') userID): Promise<User> {
     try {
       const user = await this.userService.findUserById(userID);
-      return res.status(HttpStatus.OK).json({
+      return res.json({
         message: 'User obtained successfully ',
         user,
       });
@@ -72,7 +71,7 @@ export class UserController {
   ): Promise<User> {
     try {
       const user = await this.userService.updateUser(userID, updateUserDTO);
-      return res.status(HttpStatus.OK).json({
+      return res.json({
         message: 'User update successfully',
         user,
       });
@@ -87,7 +86,7 @@ export class UserController {
   async delete(@Res() res, @Param('userID') userID: string): Promise<User> {
     try {
       const user = await this.userService.deleteUSer(userID);
-      return res.status(HttpStatus.OK).json({
+      return res.json({
         message: 'User removed successfully',
         user,
       });
