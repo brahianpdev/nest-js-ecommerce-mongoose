@@ -7,8 +7,6 @@ export class CreateProductDTO {
   subcategory: string;
   comment: string;
   price: number;
-  state: boolean;
-  createdAt: Date;
 }
 
 export type UpdateProductDTO = Partial<CreateProductDTO>;
