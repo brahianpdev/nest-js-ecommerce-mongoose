@@ -1,22 +1,54 @@
-import { Schema } from 'mongoose';
+import * as mongoose from 'mongoose';
+import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
+import { Document } from 'mongoose';
 
-export const ProductSchema = new Schema({
-  title: { type: String, required: true },
-  description: { type: String, required: true },
-  brand: { type: Schema.Types.ObjectId, ref: 'Brand', required: true },
-  category: { type: Schema.Types.ObjectId, ref: 'Category', required: true },
-  subcategory: {
-    type: Schema.Types.ObjectId,
+export type ProductSchema = Product & Document;
+@Schema()
+export class Product {
+  @Prop({ type: String, required: true })
+  title: string;
+
+  @Prop({ type: String, required: true })
+  description: string;
+
+  @Prop({ type: mongoose.Schema.Types.ObjectId, ref: 'Brand', required: true })
+  brand: mongoose.Schema.Types.ObjectId;
+
+  @Prop({
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'Category',
+    required: true,
+  })
+  category: mongoose.Schema.Types.ObjectId;
+
+  @Prop({
+    type: mongoose.Schema.Types.ObjectId,
     ref: 'SubCategory',
     required: false,
-  },
-  image: { type: String, required: true },
-  price: { type: Number, required: true },
-  comment: { type: Schema.Types.ObjectId, ref: 'Comment' },
-  owner: { type: Schema.Types.ObjectId, ref: 'User' },
-  state: { type: Boolean, default: true },
-  created: {
-    type: Date,
-    default: Date.now,
-  },
-});
+  })
+  subcategory: mongoose.Schema.Types.ObjectId;
+
+  @Prop({ type: String, required: true })
+  image: string;
+
+  @Prop({ type: Number, required: true })
+  price: number;
+
+  @Prop({
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'Comment',
+    required: false,
+  })
+  comment: mongoose.Schema.Types.ObjectId;
+
+  @Prop({ type: mongoose.Schema.Types.ObjectId, ref: 'User', required: true })
+  owner: mongoose.Schema.Types.ObjectId;
+
+  @Prop({ type: Boolean, default: true })
+  state: boolean;
+
+  @Prop({ type: Date, default: Date.now })
+  created: Date;
+}
+
+export const ProductSchema = SchemaFactory.createForClass(Product);
