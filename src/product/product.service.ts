@@ -11,11 +11,7 @@ export class ProductService {
 
   async findAll(): Promise<Product[]> {
     try {
-      return await this.productModel
-        .find()
-        .populate('brand')
-        .populate('category')
-        .populate('subcategory');
+      return await this.productModel.find();
     } catch (error) {
       throw new Error(error);
     }
