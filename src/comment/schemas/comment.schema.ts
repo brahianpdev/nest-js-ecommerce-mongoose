@@ -1,12 +1,29 @@
-import { Schema } from 'mongoose';
+import * as mongoose from 'mongoose';
+import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
+import { Document } from 'mongoose';
 
-export const CommentSchema = new Schema({
-  productID: { type: Schema.Types.ObjectId, ref: 'Product' },
-  comment: { type: String, required: true },
-  state: { type: Boolean, default: true },
-  userID: { type: Schema.Types.ObjectId, ref: 'User' },
-  created: {
-    type: Date,
-    default: Date.now,
-  },
-});
+export type CommentSchema = Comment & Document;
+
+@Schema()
+export class Comment {
+  @Prop({
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'Product',
+    required: true,
+  })
+  productID: mongoose.Schema.Types.ObjectId;
+
+  @Prop({ type: String, required: true })
+  comment: string;
+
+  @Prop({ type: Boolean, default: true })
+  state: boolean;
+
+  @Prop({ type: mongoose.Schema.Types.ObjectId, ref: 'User' })
+  userID: mongoose.Schema.Types.ObjectId;
+
+  @Prop({ type: Date, default: Date.now })
+  created: Date;
+}
+
+export const CommentSchema = SchemaFactory.createForClass(Comment);
