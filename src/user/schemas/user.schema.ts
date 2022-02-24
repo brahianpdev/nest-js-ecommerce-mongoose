@@ -1,15 +1,27 @@
-import { Schema } from 'mongoose';
+import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
+import { Document } from 'mongoose';
 
-export const UserSchema = new Schema({
-  username: { type: String, required: true },
-  password: { type: String, required: true },
-  email: { type: String, required: true },
-  role: {
-    type: String,
-    required: false,
-    default: 'USER_ROLE',
-    enum: ['ADMIN_ROLE', 'USER_ROLE'],
-  },
-  state: { type: Boolean, default: true },
-  createdAt: { type: Date, default: Date.now },
-});
+export type UserSchema = User & Document;
+
+@Schema()
+export class User {
+  @Prop({ type: String, required: true })
+  username: string;
+
+  @Prop({ type: String, required: true })
+  password: string;
+
+  @Prop({ type: String, required: true })
+  email: string;
+
+  @Prop({ type: Boolean, required: true })
+  seller: boolean;
+
+  @Prop({ type: Boolean, required: true })
+  state: boolean;
+
+  @Prop({ type: Date, default: Date.now })
+  createdAt: Date;
+}
+
+export const UserSchema = SchemaFactory.createForClass(User);
