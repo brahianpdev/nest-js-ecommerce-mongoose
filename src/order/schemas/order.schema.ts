@@ -1,28 +1,18 @@
-import { Schema } from 'mongoose';
+import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
+import { Document } from 'mongoose';
 
-export const OrderSChema = new Schema({
-  owner: {
-    type: Schema.Types.ObjectId,
-    ref: 'User',
-  },
-  totalPrice: {
-    type: Number,
-    default: 0,
-  },
-  products: [
-    {
-      product: {
-        type: Schema.Types.ObjectId,
-        ref: 'Product',
-      },
-      quantity: {
-        type: Number,
-        default: 0,
-      },
-    },
-  ],
-  created: {
-    type: Date,
-    default: Date.now,
-  },
-});
+export type OrderSchema = Order & Document;
+
+@Schema()
+export class Order {
+  @Prop({ type: String, required: true })
+  name: string;
+
+  @Prop({ type: Boolean, default: true })
+  state: boolean;
+
+  @Prop({ type: Date, default: Date.now })
+  created: Date;
+}
+
+export const OrderSchema = SchemaFactory.createForClass(Order);
