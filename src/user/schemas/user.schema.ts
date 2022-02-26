@@ -17,7 +17,7 @@ export class User {
   @Prop({ type: Boolean, required: true })
   seller: boolean;
 
-  @Prop({ type: Boolean, required: true })
+  @Prop({ type: Boolean, required: false })
   state: boolean;
 
   @Prop({ type: Date, default: Date.now })
