@@ -25,7 +25,6 @@ export class AuthService {
     const payload = {
       sub: user._doc._id,
       username: user._doc.username,
-      createdAt: user._doc.createdAt,
     };
 
     return {
