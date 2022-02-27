@@ -9,10 +9,14 @@ import { Model } from 'mongoose';
 import { CreateUserDTO, UpdateUserDTO } from './dto/create-user.dto';
 import { User } from './interfaces/user.interface';
 import * as bcrypt from 'bcrypt';
+import { MailService } from 'src/mail/mail.service';
 
 @Injectable()
 export class UserService {
-  constructor(@InjectModel('User') private readonly userModel: Model<User>) {}
+  constructor(
+    @InjectModel('User') private readonly userModel: Model<User>,
+    private mailService: MailService,
+  ) {}
 
   async findOne(username: string): Promise<User> {
     try {
@@ -40,6 +44,9 @@ export class UserService {
       user.email = email;
       user.role = role;
       user.password = await this.hashPassword(password, salt);
+
+      const token = Math.floor(1000 + Math.random() * 9000).toString();
+      await this.mailService.sendUserConfirmation(user, token);
 
       return await user.save();
     } catch (error) {
