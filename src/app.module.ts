@@ -13,9 +13,14 @@ import { CommentModule } from './comment/comment.module';
 import { BrandModule } from './brand/brand.module';
 import { SubcategoryModule } from './subcategory/subcategory.module';
 import { OrderModule } from './order/order.module';
+import { MailModule } from './mail/mail.module';
+import { ConfigModule } from '@nestjs/config';
 
 @Module({
   imports: [
+    ConfigModule.forRoot({
+      isGlobal: true,
+    }),
     MongooseModule.forRoot(config.mongoURL, {
       useNewUrlParser: true,
     }),
@@ -27,6 +32,7 @@ import { OrderModule } from './order/order.module';
     BrandModule,
     SubcategoryModule,
     OrderModule,
+    MailModule,
   ],
   controllers: [AppController],
   providers: [AppService],
