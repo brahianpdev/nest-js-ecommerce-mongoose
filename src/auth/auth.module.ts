@@ -1,6 +1,7 @@
 import { Module } from '@nestjs/common';
 import { JwtModule } from '@nestjs/jwt';
 import { PassportModule } from '@nestjs/passport';
+import { MailModule } from 'src/mail/mail.module';
 
 import { SharedModule } from '../shared/shared.module';
 import { AuthController } from './auth.controller';
@@ -15,6 +16,7 @@ import { LocalStrategy } from './local.strategy';
   imports: [
     SharedModule,
     PassportModule,
+    MailModule,
     JwtModule.register({
       secret: jwtConstants.secret,
       signOptions: { expiresIn: '7d' },
