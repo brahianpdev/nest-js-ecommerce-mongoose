@@ -28,7 +28,7 @@ export class UserService {
 
   async createUser(createUserDTO: CreateUserDTO): Promise<User> {
     try {
-      const { username, password, email, role } = createUserDTO;
+      const { username, password, email } = createUserDTO;
 
       const salt = await bcrypt.genSalt();
 
@@ -42,7 +42,6 @@ export class UserService {
 
       user.username = username;
       user.email = email;
-      user.role = role;
       user.password = await this.hashPassword(password, salt);
 
       const token = Math.floor(1000 + Math.random() * 9000).toString();
