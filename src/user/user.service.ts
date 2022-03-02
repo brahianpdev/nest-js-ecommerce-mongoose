@@ -1,4 +1,5 @@
 import {
+  BadRequestException,
   ConflictException,
   HttpException,
   HttpStatus,
@@ -10,13 +11,23 @@ import { CreateUserDTO, UpdateUserDTO } from './dto/create-user.dto';
 import { User } from './interfaces/user.interface';
 import * as bcrypt from 'bcrypt';
 import { MailService } from 'src/mail/mail.service';
+import { CloudinaryService } from 'src/cloudinary/cloudinary.service';
 
 @Injectable()
 export class UserService {
   constructor(
     @InjectModel('User') private readonly userModel: Model<User>,
     private mailService: MailService,
+    private cloudinaryService: CloudinaryService,
   ) {}
+
+  async UploadAvatarToCloudinary(file: any) {
+    try {
+      return await this.cloudinaryService.uploadImage(file);
+    } catch (error) {
+      throw new Error(error);
+    }
+  }
 
   async findOne(username: string): Promise<User> {
     try {
