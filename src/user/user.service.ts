@@ -1,5 +1,4 @@
 import {
-  BadRequestException,
   ConflictException,
   HttpException,
   HttpStatus,
@@ -21,7 +20,7 @@ export class UserService {
     private cloudinaryService: CloudinaryService,
   ) {}
 
-  async UploadAvatarToCloudinary(file: any) {
+  async UploadAvatarToCloudinary(file: Express.Multer.File) {
     try {
       return await this.cloudinaryService.uploadImage(file);
     } catch (error) {
