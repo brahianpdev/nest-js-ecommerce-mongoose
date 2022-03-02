@@ -6,10 +6,12 @@ import { UserSchema } from '../user/schemas/user.schema';
 import { HttpExceptionFilter } from './http-exception.filter';
 import { LoggingInterceptor } from './logging.interceptor';
 import { UserService } from '../user/user.service';
+import { CloudinaryService } from 'src/cloudinary/cloudinary.service';
 
 @Module({
   imports: [MongooseModule.forFeature([{ name: 'User', schema: UserSchema }])],
   providers: [
+    CloudinaryService,
     UserService,
     {
       provide: APP_FILTER,
