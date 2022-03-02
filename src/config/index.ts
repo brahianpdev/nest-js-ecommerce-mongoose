@@ -9,6 +9,9 @@ const {
   MAIL_USER,
   MAIL_PASSWORD,
   MAIL_FROM,
+  CLD_CLOUD_NAME,
+  CLD_API_KEY,
+  CLD_API_SECRET,
 } = process.env;
 
 export const config = {
@@ -19,4 +22,7 @@ export const config = {
   mailUser: MAIL_USER,
   mailPassword: MAIL_PASSWORD,
   mailFrom: MAIL_FROM,
+  cloudinaryName: CLD_CLOUD_NAME,
+  cloudinaryKey: CLD_API_KEY,
+  cloudinarySecretKey: CLD_API_SECRET,
 };
