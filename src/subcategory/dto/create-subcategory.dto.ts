@@ -1,7 +1,12 @@
-import { IsNotEmpty, Length } from 'class-validator';
+import { IsNotEmpty, MaxLength, MinLength } from 'class-validator';
 export class CreateSubCategoryDTO {
   @IsNotEmpty()
-  @Length(8, 15)
+  @MinLength(8, {
+    message: 'The min length of name of subcategory is 8 characters',
+  })
+  @MaxLength(15, {
+    message: 'The min length of name of subcategory is 15 characters',
+  })
   name: string;
 }
 
