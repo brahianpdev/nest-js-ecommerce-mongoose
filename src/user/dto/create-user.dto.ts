@@ -1,15 +1,17 @@
-import { IsEmail, IsNotEmpty, Length } from 'class-validator';
+import { IsEmail, IsNotEmpty, MaxLength, MinLength } from 'class-validator';
 
 export class CreateUserDTO {
-  @IsNotEmpty()
-  @Length(8, 15)
+  @IsNotEmpty({ message: 'Username is required' })
+  @MinLength(8, { message: 'The min length of username is 8 characters' })
+  @MaxLength(15, { message: 'The max length of username is 15 characters' })
   username: string;
 
-  @IsNotEmpty()
-  @Length(12, 30)
+  @IsNotEmpty({ message: 'Password is required' })
+  @MinLength(12, { message: 'The min length of password is 12 characters' })
+  @MaxLength(30, { message: 'The min length of password is 12 characters' })
   password: string;
 
-  @IsNotEmpty()
+  @IsNotEmpty({ message: 'Email is required' })
   @IsEmail()
   email: string;
 }
