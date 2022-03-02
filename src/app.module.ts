@@ -2,9 +2,13 @@ import { Module } from '@nestjs/common';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 
-import { MongooseModule } from '@nestjs/mongoose';
+import { MulterModule } from '@nestjs/platform-express';
+import { memoryStorage } from 'multer';
+
 import { config } from './config';
 
+import { ConfigModule } from '@nestjs/config';
+import { MongooseModule } from '@nestjs/mongoose';
 import { ProductModule } from './product/product.module';
 import { AuthModule } from './auth/auth.module';
 import { UserModule } from './user/user.module';
@@ -14,7 +18,8 @@ import { BrandModule } from './brand/brand.module';
 import { SubcategoryModule } from './subcategory/subcategory.module';
 import { OrderModule } from './order/order.module';
 import { MailModule } from './mail/mail.module';
-import { ConfigModule } from '@nestjs/config';
+import { CloudinaryModule } from './cloudinary/cloudinary.module';
+import { UploadController } from './upload/upload.controller';
 
 @Module({
   imports: [
@@ -23,6 +28,13 @@ import { ConfigModule } from '@nestjs/config';
     }),
     MongooseModule.forRoot(config.mongoURL, {
       useNewUrlParser: true,
+    }),
+    ConfigModule.forRoot({
+      envFilePath: '.env',
+    }),
+    MulterModule.register({
+      dest: './files',
+      storage: memoryStorage(),
     }),
     AuthModule,
     UserModule,
@@ -33,8 +45,9 @@ import { ConfigModule } from '@nestjs/config';
     SubcategoryModule,
     OrderModule,
     MailModule,
+    CloudinaryModule,
   ],
-  controllers: [AppController],
+  controllers: [AppController, UploadController],
   providers: [AppService],
 })
 export class AppModule {}
