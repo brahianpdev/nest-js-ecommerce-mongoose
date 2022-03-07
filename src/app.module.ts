@@ -5,8 +5,6 @@ import { AppService } from './app.service';
 import { MulterModule } from '@nestjs/platform-express';
 import { memoryStorage } from 'multer';
 
-import { config } from './config';
-
 import { ConfigModule } from '@nestjs/config';
 import { MongooseModule } from '@nestjs/mongoose';
 import { ProductModule } from './product/product.module';
@@ -20,18 +18,18 @@ import { OrderModule } from './order/order.module';
 import { MailModule } from './mail/mail.module';
 import { CloudinaryModule } from './cloudinary/cloudinary.module';
 import { UploadController } from './upload/upload.controller';
+import { configEnvs } from './config';
 
 @Module({
   imports: [
     ConfigModule.forRoot({
+      envFilePath: '.env',
       isGlobal: true,
     }),
-    MongooseModule.forRoot(config.mongoURL, {
+    MongooseModule.forRoot(configEnvs.mongoURL, {
       useNewUrlParser: true,
     }),
-    ConfigModule.forRoot({
-      envFilePath: '.env',
-    }),
+
     MulterModule.register({
       dest: './files',
       storage: memoryStorage(),
