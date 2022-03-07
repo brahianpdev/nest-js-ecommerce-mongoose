@@ -1,5 +1,5 @@
-import { config } from 'src/config';
+import { configEnvs } from 'src/config';
 
 export const jwtConstants = {
-  secret: config.jwt,
+  secret: configEnvs.jwt,
 };
