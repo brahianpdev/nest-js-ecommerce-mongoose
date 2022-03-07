@@ -3,7 +3,7 @@ dotenv.config();
 
 const {
   MONGO_URL,
-  SECRET_KEY,
+  JWT_SECRET_KEY,
   PORT,
   MAIL_HOST,
   MAIL_USER,
@@ -14,9 +14,9 @@ const {
   CLD_API_SECRET,
 } = process.env;
 
-export const config = {
+export const configEnvs = {
   mongoURL: MONGO_URL,
-  jwt: SECRET_KEY,
+  jwt: JWT_SECRET_KEY,
   port: PORT,
   mailSMPT: MAIL_HOST,
   mailUser: MAIL_USER,
