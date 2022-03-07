@@ -4,22 +4,22 @@ import { Global, Module } from '@nestjs/common';
 import { MailService } from './mail.service';
 import { join } from 'path';
 
-import { config } from 'src/config';
+import { configEnvs } from 'src/config';
 @Global()
 @Module({
   imports: [
     MailerModule.forRootAsync({
       useFactory: async () => ({
         transport: {
-          host: config.mailSMPT,
+          host: configEnvs.mailSMPT,
           secure: false,
           auth: {
-            user: config.mailUser,
-            pass: config.mailPassword,
+            user: configEnvs.mailUser,
+            pass: configEnvs.mailPassword,
           },
         },
         defaults: {
-          from: `"No Reply" <${config.mailFrom}>`,
+          from: `"No Reply" <${configEnvs.mailFrom}>`,
         },
         template: {
           dir: join(__dirname, 'templates'),
