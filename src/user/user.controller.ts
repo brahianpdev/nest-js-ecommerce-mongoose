@@ -11,7 +11,7 @@ import {
   UseGuards,
   UseInterceptors,
 } from '@nestjs/common';
-import { CreateUserDTO, UpdateUserDTO } from './dto/create-user.dto';
+import { UpdateUserDTO } from './dto/register-user.dto';
 import { UserService } from './user.service';
 import { User } from './interfaces/user.interface';
 import { JwtAuthGuard } from 'src/auth/jwt-auth.guard';
@@ -29,22 +29,6 @@ export class UserController {
       return this.userService.UploadAvatarToCloudinary(file);
     } catch (error) {
       console.log(error);
-      throw new Error(error);
-    }
-  }
-
-  @Post('register')
-  async create(
-    @Res() res,
-    @Body() createUserDtO: CreateUserDTO,
-  ): Promise<User> {
-    try {
-      const user = await this.userService.createUser(createUserDtO);
-      return res.json({
-        message: 'User created successfully',
-        user,
-      });
-    } catch (error) {
       throw new Error(error);
     }
   }
