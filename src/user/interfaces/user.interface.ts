@@ -5,5 +5,6 @@ export interface User extends Document {
   password: string;
   email: string;
   state: boolean;
+  isEmailConfirmed: boolean;
   createdAt?: Date;
 }
