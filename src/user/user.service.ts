@@ -1,22 +1,15 @@
-import {
-  ConflictException,
-  HttpException,
-  HttpStatus,
-  Injectable,
-} from '@nestjs/common';
+import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
-import { CreateUserDTO, UpdateUserDTO } from './dto/create-user.dto';
+import { UpdateUserDTO } from './dto/register-user.dto';
 import { User } from './interfaces/user.interface';
 import * as bcrypt from 'bcrypt';
-import { MailService } from 'src/mail/mail.service';
 import { CloudinaryService } from 'src/cloudinary/cloudinary.service';
 
 @Injectable()
 export class UserService {
   constructor(
     @InjectModel('User') private readonly userModel: Model<User>,
-    private mailService: MailService,
     private cloudinaryService: CloudinaryService,
   ) {}
 
@@ -31,33 +24,6 @@ export class UserService {
   async findOne(username: string): Promise<User> {
     try {
       return await this.userModel.findOne({ username });
-    } catch (error) {
-      throw new Error(error);
-    }
-  }
-
-  async createUser(createUserDTO: CreateUserDTO): Promise<User> {
-    try {
-      const { username, password, email } = createUserDTO;
-
-      const salt = await bcrypt.genSalt();
-
-      const userExist = await this.findOne(username);
-
-      if (userExist) {
-        throw new ConflictException('Username already exist');
-      }
-
-      const user = new this.userModel(createUserDTO);
-
-      user.username = username;
-      user.email = email;
-      user.password = await this.hashPassword(password, salt);
-
-      const token = Math.floor(1000 + Math.random() * 9000).toString();
-      await this.mailService.sendUserConfirmation(user, token);
-
-      return await user.save();
     } catch (error) {
       throw new Error(error);
     }
