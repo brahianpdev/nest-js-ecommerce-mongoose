@@ -1,4 +1,4 @@
-// import { User } from 'src/user/interfaces/user.interface';
+import { User } from 'src/user/interfaces/user.interface';
 
 export interface ProductOrder<ProductType = string> {
   product: ProductType;
@@ -6,7 +6,7 @@ export interface ProductOrder<ProductType = string> {
 }
 
 export interface Order extends Document {
-  // owner: User['_id'];
+  owner: User['_id'];
   products: ProductOrder[];
   totalPrice: number;
   created: Date;
