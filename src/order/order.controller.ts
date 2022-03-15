@@ -1,4 +1,4 @@
-import { Body, Controller, Get, Post, UseGuards } from '@nestjs/common';
+import { Body, Controller, Get, Post, Req, UseGuards } from '@nestjs/common';
 import { JwtAuthGuard } from 'src/auth/jwt-auth.guard';
 import { CreateOrderDTO } from './dto/create-order.dto';
 import { Order } from './interfaces/order.interface';
@@ -15,9 +15,13 @@ export class OrderController {
   }
 
   @Post()
-  async createOrder(@Body() order: CreateOrderDTO): Promise<Order> {
-    const newOrder = await this.orderService.createOrder(order);
-    console.log(newOrder);
-    return newOrder;
+  async createOrder(@Req() req, @Body() order: CreateOrderDTO) {
+    try {
+      const id = req.params.id;
+
+      return await this.orderService.createOrder(order, id);
+    } catch (error) {
+      throw new Error(error);
+    }
   }
 }
